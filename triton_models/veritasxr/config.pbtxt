@@ -1,0 +1,28 @@
+name: "veritasxr"
+backend: "onnxruntime"
+max_batch_size: 8
+
+input [
+  {
+    name: "input"
+    data_type: TYPE_FP32
+    dims: [ 1, 224, 224 ]
+  }
+]
+
+output [
+  {
+    name: "verdict"
+    data_type: TYPE_FP32
+    dims: [ 2 ]
+  },
+  {
+    name: "uncertainty"
+    data_type: TYPE_FP32
+    dims: [ 1 ]
+  }
+]
+
+dynamic_batching {
+  preferred_batch_size: [ 1, 4, 8 ]
+}
